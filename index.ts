@@ -163,6 +163,15 @@ export class Parser {
     }
   }
 
+  /**
+   * value : object
+   * | array
+   * | NUMBER
+   * | STRING
+   * | TRUE
+   * | FALSE
+   * | NULL
+   */
   private value(): jObject | jArray | jPrimative {
     const token = this.current_token;
     if (token?.isBeginObject()) {
@@ -203,6 +212,9 @@ export class Parser {
     return new jPrimative(new Token(eTokens.NULL, 'NULL'));
   }
 
+  /**
+   * object : BEGIN_OBJECT name_value_list END_OBJECT
+   */
   private object(): jObject {
     this.eat(eTokens.BEGIN_OBJECT);
     const nodes = this.name_value_list();
@@ -216,6 +228,9 @@ export class Parser {
     return obj;
   }
 
+  /**
+   * array : BEGIN_ARRAY value_list END_ARRAY
+   */
   private array(): jArray {
     this.eat(eTokens.BEGIN_ARRAY);
     const nodes = this.value_list();
@@ -229,6 +244,10 @@ export class Parser {
     return arr;
   }
 
+  /**
+   * name_value_list: name_value
+   * | name_value COMMA name_value_list
+   */
   private name_value_list(): jNameValue[] {
     const node = this.name_value();
 
@@ -242,6 +261,9 @@ export class Parser {
     return results;
   }
 
+  /**
+   * name_value: string COLON value
+   */
   private name_value(): jNameValue {
     const name = <string>this.current_token?.value;
     this.eat(eTokens.STRING);
@@ -251,6 +273,10 @@ export class Parser {
     return new jNameValue(name, value);
   }
 
+  /**
+   * value_list: value
+   * | value COMMA value_list
+   */
   private value_list(): AST[] {
     const node = this.value();
 
@@ -263,6 +289,9 @@ export class Parser {
     return results;
   }
 
+  /**
+   * parse() - builds the AST and walks the AST to build the Javascript representation.
+   */
   public parse(): any {
     const node = this.value();
     if (!this.current_token?.isEOF()) {
