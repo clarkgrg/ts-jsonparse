@@ -29,7 +29,30 @@ The JSON parser is divided into 3 parts:
 - Parser - Builds Abstract Syntax Tree
 - JSONBuilder - Walks the AST and builds a Javascript representation of the JSON.
 
-The Parser implements the following JSON Grammer
+### Lexer
+
+The job of the Lexer is to break the parts of the string into tokens. For JSON we look for the following tokens.
+
+```Javascript
+export enum eTokens {
+  BEGIN_ARRAY = '[', // left square bracket
+  BEGIN_OBJECT = '{', // left curly bracket
+  END_ARRAY = ']', // right square bracket
+  END_OBJECT = '}', // right curly bracket
+  COLON = ':',
+  COMMA = ',',
+  TRUE = 'TRUE',
+  FALSE = 'FALSE',
+  NULL = 'NULL',
+  NUMBER = 'NUMBER',
+  STRING = 'STRING',
+  EOF = 'EOF',
+}
+```
+
+### Parser
+
+The goal of the parser is to find structure in the stream of tokens. I choose to implement an Abstract Syntax Tree (AST) to represent the JSON string. The Parser implements the following JSON Grammer to build the AST.
 
 ```
 value : object
@@ -52,3 +75,7 @@ name_value: string COLON value
 value_list: value
 | value COMMA value_list
 ```
+
+### JSONBuilder
+
+The JSONBuilder walks the AST and builds the Javascript represntation of the JSON string.
