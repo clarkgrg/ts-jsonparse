@@ -1,9 +1,12 @@
 {
   "name": "ts-jsonparse",
   "version": "0.1.4",
-  "description": "",
-  "main": "index.js",
+  "description": "JSON parser written in Typescript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
+    "prepublish": "tsc",
     "test": "jest"
   },
   "keywords": [],
