@@ -54,7 +54,7 @@ export enum eTokens {
 
 The goal of the parser is to find structure in the stream of tokens. I choose to implement an Abstract Syntax Tree (AST) to represent the JSON string.
 
-![JSON Values](https://https://github.com/clarkgrg/ts-jsonparse/blob/main/images/Objects.png)
+![JSON Values](https://https://github.com/clarkgrg/ts-jsonparse/images/Objects.png)
 
 The Parser implements the following JSON Grammer to build the AST.
 
