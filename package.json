@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "keywords": [],
+  "homepage": "https://github.com/clarkgrg/ts-jsonparse",
   "author": "Greg Clark <clarkgrg@gmail.com>",
   "license": "MIT",
   "dependencies": {
